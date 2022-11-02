@@ -9,7 +9,9 @@ from django.contrib.auth.decorators import login_required
 from .models import Review, Comment
 from django.contrib import messages
 from django.http import JsonResponse
+# 지도 구현 라이브러리
 import folium
+from geopy.geocoders import Nominatim
 
 # Create your views here.
 
@@ -160,8 +162,12 @@ def index(request):
 def review_detail(request, pk):
     review = Review.objects.get(pk=pk)
     comment_form = CommentForm()
-    m = folium.Map(location=[35.889, 128.6094])
-
+    # 좌표 불러오기
+    geolocoder = Nominatim(user_agent = 'South Korea')
+    geo = geolocoder.geocode('경북대학교')
+    crd = [geo.latitude, geo.longitude]
+    # folium으로 지도 불러오기
+    m = folium.Map(location=crd)
     maps=m._repr_html_()
     context = {
         'review': review,
