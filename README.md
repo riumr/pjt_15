@@ -6,7 +6,7 @@
 하위 파일: 글머리 기호
 
 <aside>
-💡 Ctrl + E : 인라인 코드    /     Ctrl + alt + 8 : 코드 블록
+Ctrl + E : 인라인 코드    /     Ctrl + alt + 8 : 코드 블록
 
 </aside>
 
