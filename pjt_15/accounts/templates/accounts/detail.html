@@ -1,0 +1,41 @@
+{% extends '../base/base.html' %}
+{% block content %}
+  <div class="row mt-5 text-center justify-content-center">
+    <h1 class="my-5">{{ user.username }}님의 프로필</h1>
+    <p class="mb-4">이메일 :{{ user.email }}</p>
+    <p>팔로우 : {{ user.followings.count }} | 팔로워 : {{ user.followers.count }}</p>
+    {% if request.user != user %}
+    <a href="{% url 'follow' user.pk %}">
+      {% if request.user in user.followers.all %}
+      팔로우 취소
+      {% else %}
+      팔로우
+      {% endif %}
+    </a>
+    {% endif %}
+    <div>
+      글작성수 : {{reviews.count}} 개
+      댓글작성수 : {{comments.count}} 개
+    </div>
+    <div class='d-flex justify-content-center'>
+      <div class='m-5'>
+        <h3>작성한 게시글</h3>
+        {% for review in reviews %}
+        {{forloop.counter}} : <a href="{% url 'review-detail' review.pk%}">{{ review.title }} </a><br>
+        {% endfor %}
+      </div>
+      <div class='m-5'>
+        <h3>작성한 댓글</h3>
+        {% for comment in comments %}
+        {{forloop.counter}} : <a href="{% url 'review-detail' comment.review_id %}">{{ comment.content }} </a><br>
+        {% endfor %}
+      </div>
+    </div>
+
+    <a href="{% url 'index' %}" class="btn btn-primary col-2">목록으로</a>
+    {% if request.user.pk == user.pk %}
+    <a href="{% url 'edit' user.pk %}" class="btn btn-primary col-2">수정하기</a>
+    <a href="{% url 'delete'%}" class="btn btn-primary col-2">삭제하기</a>
+    {% endif %}
+  </div>
+{% endblock content %}

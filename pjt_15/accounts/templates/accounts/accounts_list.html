@@ -1,0 +1,31 @@
+{% extends '../base/base.html' %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+  <div class="row mt-5 mx-5">
+    <h1 class="text-center">회원목록</h1>
+    <!-- Table -->
+    <table class="table table-hover mt-3">
+      <thead>
+        <tr>
+          <th scope="col">번호</th>
+          <th scope="col">닉네임</th>
+          <th scope="col">이메일</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in users %}
+          <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>
+              <a href="{% url 'detail' user.pk %}">{{ user.username }}</a>
+            </td>
+            <td>{{ user.email }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <a class="btn btn-primary mx-5" href="{% url 'signup' %}">회원가입</a>
+</div>
+{% endblock content %}

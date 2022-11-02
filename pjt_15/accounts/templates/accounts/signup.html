@@ -1,0 +1,16 @@
+{% extends '../base/base.html' %}
+{% load django_bootstrap5 %}
+
+{% block nav %}
+<p>좋은하루 되세요</p>
+{% endblock nav %}
+
+{% block content %}
+  <h1>회원가입</h1>
+  <form method="POST">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% bootstrap_button button_type="submit" content="OK"%}
+  </form>
+
+{% endblock content %}

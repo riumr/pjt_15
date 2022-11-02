@@ -1,0 +1,100 @@
+{% extends '../base/base.html' %}
+
+{% load django_bootstrap5 %}
+
+{% block content %}
+<div class="container">
+<h5><a href="{% url 'detail' review.author.pk %}">{{ review.author.username }}</a>님의 게시글 </h5>
+<h2>{{ review.title}}</h2>
+<p>{{ review.created_at|date:"SHORT_DATETIME_FORMAT" }} | {{ review.updated_at|date:"y-m-d D" }}</p>
+<p>{{ review.content }} </p>
+{% if review.image %}
+<img src="{{ review.image.url }}" alt="{{ review.image }}" width="400" height="300">
+{% endif %}
+<div>
+    {% if request.user.is_authenticated %}
+   
+      {% if request.user in review.like_users.all %}
+        <i id="like-btn" data-review-id="{{review.pk}}" class="bi bi-heart-fill"></i>
+      {% else %}
+        <i id="like-btn" data-review-id="{{review.pk}}" class="bi bi-heart"></i></a>
+      {% endif %}
+      <span id="like-count">좋아요 {{ review.like_users.count }}</span>
+    {% endif %}
+</div>
+<div>
+{% if review.author == user %}
+<a href="{% url 'review-update' review.pk %}">수정하기</a>
+
+{% endif %}
+<a href="{% url 'index' %}">목록으로</a>
+</div>
+
+{% if request.user.is_authenticated %}
+<h4 class="my-3">댓글</h4>
+<form id="comment-form" data-review-id="{{ article.pk }}">
+    {% csrf_token %}
+    {% bootstrap_form comment_form layout='inline'%}
+    {% bootstrap_button button_type="submit" content="OK" %}
+</form>
+{% endif %}
+<hr>
+<div id="comments">
+{% for comment in comments %}
+    <p>{{comment.author.username}} : {{ comment.content }}</p>
+    <hr>    
+{% empty %}
+    <p>댓글이 없어요! 댓글을 써보시겠어요?</p>
+{% endfor %}
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+  const likeBtn = document.querySelector('#like-btn')
+  likeBtn.addEventListener('click', function (event) {
+    console.log(event.target.dataset)
+    axios({
+      method: 'get',
+      url: `/${event.target.dataset.reviewId}/like/`
+      
+    })
+    .then(response => {
+      console.log(response)
+      console.log(response.data)
+      if (response.data.isLiked === true){
+        event.target.classList.add('bi-heart-fill')
+        event.target.classList.remove('bi-heart')
+      } else {
+        event.target.classList.add('bi-heart')
+        event.target.classList.remove('bi-heart-fill')
+      }
+      const likeCount = document.querySelector('#like-count')
+      likeCount.innerText = response.data.likeCount
+    })
+  })
+    
+</script>
+
+<script>
+  const commentForm = document.querySelector('#comment-form')
+  const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
+  commentForm.addEventListener('submit', function(event){
+    event.preventDefault();
+    axios({
+      method: 'post',
+      url: `/${event.target.dataset.reviewId}/comments`,
+      headers: {'X-CSRFToken': csrftoken},
+      data: new FormData(commentForm)
+    })
+    .then(respnse => {
+      console.log(response.data)
+      const comments = document.querySelector('#comments')
+      const p = document.createElement('p')
+      p.innerText = `${response.data.userName}| ${response.data.content}`
+      const hr = document.createElement('hr')
+      comments.append(p, hr)
+      commentForm.reset()
+    })
+  })
+</script>
+{% endblock %}
