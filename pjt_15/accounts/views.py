@@ -9,6 +9,8 @@ from django.contrib.auth.decorators import login_required
 from .models import Review, Comment
 from django.contrib import messages
 from django.http import JsonResponse
+import folium
+
 # Create your views here.
 
 
@@ -158,10 +160,14 @@ def index(request):
 def review_detail(request, pk):
     review = Review.objects.get(pk=pk)
     comment_form = CommentForm()
+    m = folium.Map(location=[35.889, 128.6094])
+
+    maps=m._repr_html_()
     context = {
         'review': review,
         'comments': review.comment_set.all(),
         'comment_form': comment_form,
+        'map':maps,
     }
     return render(request, 'reviews/detail.html', context)
 

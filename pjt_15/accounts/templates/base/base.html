@@ -36,7 +36,9 @@
   {% for review in reviews %}
   <div class="col-4">
     <div class="card">
+      {% if image %}
       <img src="{{ review.image.url }}" class="card-img-top" alt="...">
+      {% endif %}
       <div class="card-body">
         <h5 class="card-title">{{ review.title }}</h5>
         <p>작성자: {{review.author.username}}</p>
