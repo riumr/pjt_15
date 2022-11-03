@@ -1,5 +1,5 @@
 {% extends '../base/base.html' %}
-
+{% load static %}
 {% load django_bootstrap5 %}
 
 {% block content %}
@@ -8,9 +8,14 @@
 <h2>{{ review.title}}</h2>
 <p>{{ review.created_at|date:"SHORT_DATETIME_FORMAT" }} | {{ review.updated_at|date:"y-m-d D" }}</p>
 <p>{{ review.content }} </p>
+
+
+{% comment %} 이미지 {% endcomment %}
 {% if review.image %}
 <img src="{{ review.image.url }}" alt="{{ review.image }}" width="400" height="300">
 {% endif %}
+
+{% comment %} 좋아요 {% endcomment %}
 <div>
     {% if request.user.is_authenticated %}
    
@@ -22,6 +27,8 @@
       <span id="like-count">좋아요 {{ review.like_users.count }}</span>
     {% endif %}
 </div>
+
+{% comment %} 수정하기 / 목록 {% endcomment %}
 <div>
 {% if review.author == user %}
 <a href="{% url 'review-update' review.pk %}">수정하기</a>
@@ -30,6 +37,7 @@
 <a href="{% url 'index' %}">목록으로</a>
 </div>
 
+{% comment %} 댓글 {% endcomment %}
 {% if request.user.is_authenticated %}
 <h4 class="my-3">댓글</h4>
 <form id="comment-form" data-review-id="{{ article.pk }}">
@@ -48,6 +56,7 @@
 {% endfor %}
 </div>
 
+{% comment %} 좋아요 비동기 {% endcomment %}
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
   const likeBtn = document.querySelector('#like-btn')
@@ -75,6 +84,7 @@
     
 </script>
 
+{% comment %} 댓글 비동기 {% endcomment %}
 <script>
   const commentForm = document.querySelector('#comment-form')
   const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
@@ -97,11 +107,7 @@
     })
   })
 </script>
+
 <!-- 지도(folium) 테스트 -->
-<form action="" method="GET">
-  <label for="enterGeo">주소입력</label>
-  <input type="text"/>
-  <button type="submit">검색</button>
-</form>
 {{map|safe}}
 {% endblock %}

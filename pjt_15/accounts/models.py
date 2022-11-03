@@ -3,10 +3,15 @@ from django.contrib.auth.models import AbstractUser
 from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFill
 from django.conf import settings
+
 # Create your models here.
 
+
 class User(AbstractUser):
-    followings = models.ManyToManyField('self', symmetrical=False, related_name='followers')
+    followings = models.ManyToManyField(
+        "self", symmetrical=False, related_name="followers"
+    )
+
 
 class Review(models.Model):
     title = models.CharField(max_length=20)
@@ -14,14 +19,20 @@ class Review(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     image = ProcessedImageField(
-                            upload_to='images/', 
-                            blank=True, 
-                            processors=[ResizeToFill(1200, 960)],
-                            format='JPEG',
-                            options={'quality': 80}
-                            )
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,default='',null=True)
-    like_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_reviews')
+        upload_to="images/",
+        blank=True,
+        processors=[ResizeToFill(1200, 960)],
+        format="JPEG",
+        options={"quality": 80},
+    )
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default="", null=True
+    )
+    like_users = models.ManyToManyField(
+        settings.AUTH_USER_MODEL, related_name="like_reviews"
+    )
+    location = models.CharField(max_length=40)
+
 
 class Comment(models.Model):
     content = models.TextField(max_length=300, blank=False)
