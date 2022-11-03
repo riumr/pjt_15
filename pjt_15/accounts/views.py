@@ -19,27 +19,27 @@ import googlemaps
 # Create your views here.
 
 
-def test(request, pk):
+# def test(request, pk):
 
-    review = Review.objects.get(pk=pk)
-    comment_form = CommentForm()
+#     review = Review.objects.get(pk=pk)
+#     comment_form = CommentForm()
 
-    location = review.location
-    gmaps = googlemaps.Client(key="AIzaSyCyVj2SsrSGeHVWM1uawHssRzDyTuW8Yuo")
-    geocode_result = gmaps.geocode((location), language="ko")
+#     location = review.location
+#     gmaps = googlemaps.Client(key="AIzaSyCyVj2SsrSGeHVWM1uawHssRzDyTuW8Yuo")
+#     geocode_result = gmaps.geocode((location), language="ko")
 
-    lat = geocode_result[0]["geometry"]["location"]["lat"]
-    lng = geocode_result[0]["geometry"]["location"]["lng"]
+#     lat = geocode_result[0]["geometry"]["location"]["lat"]
+#     lng = geocode_result[0]["geometry"]["location"]["lng"]
 
-    context = {
-        "review": review,
-        "comments": review.comment_set.all(),
-        "comment_form": comment_form,
-        "geocode_result": geocode_result,
-        "lat": lat,
-        "lng": lng,
-    }
-    return render(request, "reviews/test.html", context)
+#     context = {
+#         "review": review,
+#         "comments": review.comment_set.all(),
+#         "comment_form": comment_form,
+#         "geocode_result": geocode_result,
+#         "lat": lat,
+#         "lng": lng,
+#     }
+#     return render(request, "reviews/test.html", context)
 
 
 # Account_View
@@ -182,18 +182,20 @@ def index(request):
 def review_detail(request, pk):
     review = Review.objects.get(pk=pk)
     comment_form = CommentForm()
-    # 좌표 불러오기
-    geolocoder = Nominatim(user_agent="South Korea")
-    geo = geolocoder.geocode("경북대학교")
-    crd = [geo.latitude, geo.longitude]
-    # folium으로 지도 불러오기
-    m = folium.Map(location=crd)
-    maps = m._repr_html_()
+
+    location = review.location
+    gmaps = googlemaps.Client(key="AIzaSyCyVj2SsrSGeHVWM1uawHssRzDyTuW8Yuo")
+    geocode_result = gmaps.geocode((location), language="ko")
+
+    lat = geocode_result[0]["geometry"]["location"]["lat"]
+    lng = geocode_result[0]["geometry"]["location"]["lng"]
+
     context = {
         "review": review,
         "comments": review.comment_set.all(),
         "comment_form": comment_form,
-        "map": maps,
+        "lat": lat,
+        "lng": lng,
     }
     return render(request, "reviews/detail.html", context)
 

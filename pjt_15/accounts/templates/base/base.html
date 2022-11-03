@@ -21,7 +21,7 @@
     {% block nav %}
       <div class="container ms-3 justify-content-start">
         {% if request.user.is_authenticated %}
-          <a href="http://127.0.0.1:8000/" class="d-inline">메인</a>
+          <a href="http://127.0.0.1:8000/">메인</a>
           <p>{{ request.user.username }}님 안녕하세요
             <a class="btn btn-primary" href="{% url 'logout' %}">로그아웃하기</a>
             <a class="btn btn-primary" href="{% url 'change_password' %}">비밀번호 변경하기</a>

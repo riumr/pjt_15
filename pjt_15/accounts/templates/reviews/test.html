@@ -1,18 +1,13 @@
-{% extends '../base/base.html' %}
 {% load static %}
 {% load django_bootstrap5 %}
 
-  {% block head %}
-  <title>Add Map</title>
+  {% block map_head %}
   <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
   <script type="module" src="{% static 'js/index.js' %}"></script>
   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"/>
-  {% endblock head %}
+  {% endblock map_head %}
 
-  {% block content %}
-  {% endblock content %}
-  
-  {% block body %}
+  {% block map_body %}
   <h3>My Google Maps Demo</h3>
 
   <!--The div element for the map -->
@@ -60,4 +55,4 @@
     });
 
   </script>
-  {% endblock body %}
+  {% endblock map_body %}

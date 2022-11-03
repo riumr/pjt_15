@@ -1,10 +1,23 @@
 {% extends '../base/base.html' %}
+
 {% load static %}
 {% load django_bootstrap5 %}
 
+{% block head %}
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"/>
+{% endblock head %}
+
+
+
 {% block content %}
-<div class="container">
-<h5><a href="{% url 'detail' review.author.pk %}">{{ review.author.username }}</a>님의 게시글 </h5>
+
+{% comment %} 지도 {% endcomment %}
+<h3>My Google Maps Demo</h3>
+
+<!--The div element for the map -->
+<div id="map"></div>
+
 <h2>{{ review.title}}</h2>
 <p>{{ review.created_at|date:"SHORT_DATETIME_FORMAT" }} | {{ review.updated_at|date:"y-m-d D" }}</p>
 <p>{{ review.content }} </p>
@@ -108,6 +121,42 @@
   })
 </script>
 
-<!-- 지도(folium) 테스트 -->
-{{map|safe}}
+{% comment %} 지도 scripts {% endcomment %}
+<!-- The `defer` attribute causes the callback to execute after the full HTML document has been parsed. For non-blocking uses, avoiding race conditions, and consistent behavior across browsers, consider loading using Promises with https://www.npmjs.com/package/@googlemaps/js-api-loader. -->
+<script async="async" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2b9To0tMCbqhxpv7rsRzeYG-gdhGZ3Us&region=KO&language=ko&callback=initMap"></script>
+<script>
+  // Initialize and add the map
+  function initMap() {
+
+    // The location of geocode_result
+    const geocode_result = {
+      lat: {{ lat }},
+      lng: {{ lng }},
+    };
+
+    
+
+    // The map, centered at geocode_result
+    const map = new google
+      .maps
+      .Map(document.getElementById("map"), {
+        zoom: 15,
+        center: geocode_result
+      });
+    // The marker, positioned at geocode_result
+    const marker = new google
+      .maps
+      .Marker({position: geocode_result, map: map});
+  }
+  window.initMap = initMap;
+
+  {% comment %} 클릭 시 정보 생성 {% endcomment %}
+  const infowindow = new google.maps.InfoWindow();
+  marker.addListener("click", () => {
+    infowindow.setContent(name);
+    infowindow.open({anchor: marker, map});
+  });
+
+</script>
+
 {% endblock %}
