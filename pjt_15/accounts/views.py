@@ -250,10 +250,17 @@ def follow(request, pk):
     return redirect("detail", pk)
 
 
+# 검색기능
 def search(request):
     user_input = request.POST.get("user-search")
-    result = Review.objects.filter(location_icontains=user_input)
+    result = Review.objects.filter(location__icontains=user_input).values()[0]
     context = {
-        "result": result,
+        "title": result["title"],
+        "content": result["content"],
+        "created_at": result["created_at"],
+        "updated_at": result["updated_at"],
+        "author_id": result["author_id"],
+        "image": result["image"],
+        "location": result["location"],
     }
     return render(request, "reviews/search.html", context)

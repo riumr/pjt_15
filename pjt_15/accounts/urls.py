@@ -27,7 +27,7 @@ urlpatterns = [
     # follow
     path("<int:pk>/follow/", views.follow, name="follow"),
     # search
-    path("serach/", views.search, name="search"),
+    path("search/", views.search, name="search"),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
