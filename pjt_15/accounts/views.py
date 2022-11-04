@@ -1,5 +1,5 @@
 from django.http import HttpResponseForbidden
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import CustomUserCreationForm, CustomUserChangeForm, ReviewForm, CommentForm
 from django.contrib.auth import get_user_model, update_session_auth_hash
 from django.contrib.auth import login as auth_login
@@ -182,7 +182,7 @@ def index(request):
 def review_detail(request, pk):
     review = Review.objects.get(pk=pk)
     comment_form = CommentForm()
-
+    
     location = review.location
     gmaps = googlemaps.Client(key="AIzaSyCyVj2SsrSGeHVWM1uawHssRzDyTuW8Yuo")
     geocode_result = gmaps.geocode((location), language="ko")
@@ -203,7 +203,8 @@ def review_detail(request, pk):
 # Comment_View
 @login_required
 def comment_create(request, pk):
-    review = Review.objects.get(pk=pk)
+    # review = Review.objects.get(pk=pk)
+    review = get_object_or_404(Review, pk=pk)
     # user = get_user_model().objects.get(pk=request.user.pk)
     comment_form = CommentForm(request.POST)
     if comment_form.is_valid():
@@ -211,7 +212,7 @@ def comment_create(request, pk):
         comment.review = review
         comment.author = request.user
         comment.save()
-        context = {"content": comment.content, "userName": comment.user.username}
+        context = {"content": comment.content, "userName": comment.author.username}
     return JsonResponse(context)
 
 
