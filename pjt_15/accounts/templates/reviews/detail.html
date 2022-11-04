@@ -13,7 +13,7 @@
 {% block content %}
 
 
-<h2>{{ review.title}}</h2>
+<h2>{{ review.title}} | {{category}} | 전체 평점 : {{rate}}</h2>
 {% if review.author.image_thumbnail %}
   <p><img src="{{ review.author.image_thumbnail.url }}" alt=""></p>
 {% endif %}
@@ -117,7 +117,7 @@
       const comments = document.querySelector('#comments')
       const p = document.createElement('p')
       const stars = '⭐'.repeat(response.data.stars)
-      p.innerText = `${response.data.userName}| ${response.data.content} | ${stars}`
+      p.innerText = `${response.data.userName}| ${response.data.content} | 별점: ${stars}`
       const hr = document.createElement('hr')
       comments.append(p, hr)
       commentForm.reset()

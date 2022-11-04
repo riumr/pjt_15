@@ -24,7 +24,7 @@ class CustomUserChangeForm(UserChangeForm):
 class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
-        fields = ["title", "content", "image"]
+        fields = ["title", "content", "image","category"]
 
 
 class CommentForm(forms.ModelForm):
