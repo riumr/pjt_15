@@ -240,3 +240,12 @@ def follow(request, pk):
     else:
         user.followers.add(request.user)
     return redirect("detail", pk)
+
+
+def search(request):
+    user_input = request.POST.get("user-search")
+    result = Review.objects.filter(location_icontains=user_input)
+    context = {
+        "result": result,
+    }
+    return render(request, "reviews/search.html", context)
