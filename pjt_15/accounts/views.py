@@ -187,6 +187,12 @@ def review_detail(request, pk):
     for query in review.comment_set.all():
         rate += query.grade
 
+    
+    if review.comment_set.all(): 
+        rate_result = round(rate/len(review.comment_set.all()),2)
+    else:
+        rate_result = '평점없음'
+
     if review.location:
         location = review.location
         gmaps = googlemaps.Client(key="AIzaSyCyVj2SsrSGeHVWM1uawHssRzDyTuW8Yuo")
@@ -205,7 +211,7 @@ def review_detail(request, pk):
         "lat": lat,
         "lng": lng,
         "category": review.category,
-        "rate": round(rate/len(review.comment_set.all()),2),
+        "rate": rate_result,
     }
     return render(request, "reviews/detail.html", context)
 
