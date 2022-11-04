@@ -59,6 +59,8 @@
 
 
 <h2>{{ review.title}} | {{category}} | 전체 평점 : {{rate}}</h2>
+
+
 {% if review.author.image_thumbnail %}
   <p><img src="{{ review.author.image_thumbnail.url }}" alt=""></p>
 {% endif %}
