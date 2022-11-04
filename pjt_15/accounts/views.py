@@ -217,7 +217,7 @@ def comment_create(request, pk):
         comment.review = review
         comment.author = request.user
         comment.save()
-        context = {"content": comment.content, "userName": comment.author.username}
+        context = {"content": comment.content, "userName": comment.author.username, "stars": comment.grade}
     return JsonResponse(context)
 
 
