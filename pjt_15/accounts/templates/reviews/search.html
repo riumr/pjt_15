@@ -1,0 +1,11 @@
+{% extends '../base/base.html' %}
+
+{% block content %}
+<form action="{% url 'search_place' %}" method="POST">
+    {% csrf_token %}
+    <label for="search">장소검색</label>
+    <input id='search' type="text" name="user-search">
+    <button type="submit">검색</button>
+</form>
+<p>{{result}}</p>
+{% endblock content %}

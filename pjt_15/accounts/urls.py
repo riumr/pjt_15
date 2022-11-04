@@ -26,6 +26,8 @@ urlpatterns = [
     path("<int:pk>/like/", views.like, name="like"),
     # follow
     path("<int:pk>/follow/", views.follow, name="follow"),
+    # search
+    path("serach/", views.search, name="search"),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
