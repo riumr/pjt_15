@@ -183,6 +183,9 @@ def index(request):
 def review_detail(request, pk):
     review = Review.objects.get(pk=pk)
     comment_form = CommentForm()
+    rate = 0
+    for query in review.comment_set.all():
+        rate += query.grade
 
     if review.location:
         location = review.location
@@ -201,6 +204,8 @@ def review_detail(request, pk):
         "comment_form": comment_form,
         "lat": lat,
         "lng": lng,
+        "category": review.category,
+        "rate": round(rate/len(review.comment_set.all()),2),
     }
     return render(request, "reviews/detail.html", context)
 

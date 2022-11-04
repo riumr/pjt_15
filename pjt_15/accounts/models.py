@@ -39,6 +39,23 @@ class Review(models.Model):
         settings.AUTH_USER_MODEL, related_name="like_reviews"
     )
     location = models.CharField(max_length=40)
+    NorthAmerica = '북아메리카'
+    SouthAmerica = '남아메리카'
+    Europe = '유럽'
+    Oceania = '오세아니아'
+    Africa = '아프리카'
+    Asia = '아시아'
+    Domestic = '국내'
+    
+    continental = [
+        (NorthAmerica,'북아메리카'),
+        (SouthAmerica,'남아메리카'),
+        (Europe, '유럽'),
+        (Africa, '아프리카'),
+        (Asia, '아시아'),
+        (Domestic, '국내'),
+        ]
+    category = models.CharField(max_length=5, choices=continental, default=None)
 
 
 class Comment(models.Model):
@@ -52,3 +69,5 @@ class Comment(models.Model):
                 (4, '★★★★'),
                 (5, '★★★★★'),]
     grade = models.IntegerField(choices=RATING, default=None)
+    
+ 
