@@ -4,7 +4,7 @@
 <form action="{% url 'search' %}" method="POST">
     {% csrf_token %}
     <label for="search">장소검색</label>
-    <input id='search' type="text" name="user-search">
+    <input id="search" type="text" name="user-search">
     <button type="submit">검색</button>
 </form>
 <p>{{result}}</p>
