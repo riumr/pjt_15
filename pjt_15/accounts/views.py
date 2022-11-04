@@ -250,33 +250,33 @@ def follow(request, pk):
     return redirect("detail", pk)
 
 
-# 검색기능
+# 검색기능 : 검색 텍스트만 보내주는 페이지
 def search(request):
-    if Review:  # 테이블에 리뷰가 있으면
-        user_input = request.POST.get("user-search")  # 검색창에서 값을 받을 수 있다
+    return render(request, "reviews/search.html")
+
+
+# 검색결과 : 검색 결과만 보여주는 페이지
+def search_result(request, search_text):
+    # Review 테이블에 리뷰가 있으면
+    if Review:
         result = Review.objects.filter(
-            location__icontains=user_input
-        ).values()  # 결과는 검색한 텍스트를 포함하고 있는 위치 컬럼으로 필터링한다.
+            location__icontains=search_text  # 검색창에서 값을 받을 수 있다
+        ).values()  # 결과는 검색한 텍스트를 포함하고 있는 위치 컬럼을 기준으로 필터링한다.
         if result.exists():  # 필터링한 결과가 존재하면
-            result = Review.objects.filter(location__icontains=user_input).values()[
-                0
-            ]  # 값을 반환한다.
+            result = Review.objects.filter(
+                location__icontains=search_text
+            ).values()  # 값을 반환한다.
             context = {
-                "title": result["title"],
-                "content": result["content"],
-                "created_at": result["created_at"],
-                "updated_at": result["updated_at"],
-                "author_id": result["author_id"],
-                "image": result["image"],
-                "location": result["location"],
+                "result": result,
             }
         else:  # 필터링한 결과가 존재하지 않으면, 아무 리뷰나 표시하도록 한다.
             context = {
                 "result": "anything",
             }
-    else:  # 테이블에 리뷰가 전혀 없으면 리뷰가 없다고 표시한다.
+    # Review 테이블에 값이 없으면
+    else:
         result = "no review"
         context = {
             "result": result,
         }
-    return render(request, "reviews/search.html", context)
+    return render(request, "reviews/search_result.html", context)
