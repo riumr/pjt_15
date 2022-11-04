@@ -242,6 +242,7 @@ def follow(request, pk):
     return redirect("detail", pk)
 
 
+# 검색기능
 def search(request):
     user_input = request.POST.get("user-search")
     result = Review.objects.filter(location_icontains=user_input)
