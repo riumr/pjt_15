@@ -65,7 +65,7 @@
 <hr>
 <div id="comments">
 {% for comment in comments %}
-    <p>{{comment.author.username}} : {{ comment.content }}</p>
+    <p>{{comment.author.username}} : {{ comment.content }} | 별점 : {% for i in ''|ljust:comment.grade %}⭐{% endfor %}</p>
     <hr>    
 {% empty %}
     <p>댓글이 없어요! 댓글을 써보시겠어요?</p>
@@ -116,7 +116,8 @@
       console.log(response.data)
       const comments = document.querySelector('#comments')
       const p = document.createElement('p')
-      p.innerText = `${response.data.userName}| ${response.data.content}`
+      const stars = '⭐'.repeat(response.data.stars)
+      p.innerText = `${response.data.userName}| ${response.data.content} | ${stars}`
       const hr = document.createElement('hr')
       comments.append(p, hr)
       commentForm.reset()

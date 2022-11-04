@@ -46,3 +46,9 @@ class Comment(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     review = models.ForeignKey(Review, on_delete=models.CASCADE)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
+    RATING = [  (1, '★'),
+                (2, '★★'),
+                (3, '★★★'),
+                (4, '★★★★'),
+                (5, '★★★★★'),]
+    grade = models.IntegerField(choices=RATING, default=None)
