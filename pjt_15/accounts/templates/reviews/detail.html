@@ -5,12 +5,57 @@
 
 {% block head %}
   <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"/>
 {% endblock head %}
 
+{% block header %}
+<section>
+    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="{% static 'photo/0.png' %}" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>First slide label</h5>
+          <p>Some representative placeholder content for the first slide.</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="{% static 'photo/3.jpeg' %}" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Second slide label</h5>
+          <p>Some representative placeholder content for the second slide.</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="{% static 'photo/2.webp' %}" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Third slide label</h5>
+          <p>Some representative placeholder content for the third slide.</p>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</section>
+{% endblock header %}
 
 
 {% block content %}
+
+<div class="d-flex justify-content-center mt-5">
+  <h1>{{ review.title}}</h1>
+</div>
 
 
 <h2>{{ review.title}} | {{category}} | 전체 평점 : {{rate}}</h2>
@@ -34,24 +79,56 @@
 {% comment %} 좋아요 {% endcomment %}
 <div>
     {% if request.user.is_authenticated %}
-   
       {% if request.user in review.like_users.all %}
         <i id="like-btn" data-review-id="{{review.pk}}" class="bi bi-heart-fill"></i>
       {% else %}
         <i id="like-btn" data-review-id="{{review.pk}}" class="bi bi-heart"></i></a>
       {% endif %}
-      <span id="like-count">좋아요 {{ review.like_users.count }}</span>
+      <span id="like-count">좋아요: {{ review.like_users.count }}</span>
     {% endif %}
+  </div>
 </div>
 
-{% comment %} 수정하기 / 목록 {% endcomment %}
-<div>
-{% if review.author == user %}
-<a href="{% url 'review-update' review.pk %}">수정하기</a>
 
+<div class="d-flex justify-content-center mt-5">
+  <h3>공유 버튼</h3>
+</div>
+
+<hr class="mt-5">
+
+<ul>
+  <li>
+    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laborum, corrupti!
+  <li>
+    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laborum, corrupti!
+  </li>
+  <li>
+    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laborum, corrupti!
+  </li>
+  <li>
+    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laborum, corrupti!
+  </li>
+  <li>
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laborum, corrupti!
+  </li>
+</ul>
+
+<hr class="mt-5">
+
+{% if lat %}
+  {% comment %} 지도 {% endcomment %}
+  <div class="mt-5">
+    <div id="map"></div>
+  </div>
 {% endif %}
-<a href="{% url 'index' %}">목록으로</a>
-</div>
+
+<hr class="mt-5">
+
+{% comment %} 이미지 {% endcomment %}
+{% if review.image %}
+  <img src="{{ review.image.url }}" alt="{{ review.image }}" width="400" height="300">
+{% endif %}
+
 
 {% comment %} 댓글 {% endcomment %}
 {% if request.user.is_authenticated %}
@@ -62,7 +139,9 @@
     {% bootstrap_button button_type="submit" content="OK" %}
 </form>
 {% endif %}
-<hr>
+
+<hr class="mt-5">
+
 <div id="comments">
 {% for comment in comments %}
     <p>{{comment.author.username}} : {{ comment.content }} | 별점 : {% for i in ''|ljust:comment.grade %}⭐{% endfor %}</p>

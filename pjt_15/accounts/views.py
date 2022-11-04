@@ -177,7 +177,7 @@ def review_delete(request, pk):
 def index(request):
     reviews = Review.objects.order_by("-pk")
     context = {"reviews": reviews}
-    return render(request, "base/base.html", context)
+    return render(request, "accounts/index.html", context)
 
 
 def review_detail(request, pk):
@@ -222,7 +222,11 @@ def comment_create(request, pk):
         comment.review = review
         comment.author = request.user
         comment.save()
-        context = {"content": comment.content, "userName": comment.author.username, "stars": comment.grade}
+        context = {
+            "content": comment.content,
+            "userName": comment.author.username,
+            "stars": comment.grade,
+        }
     return JsonResponse(context)
 
 
