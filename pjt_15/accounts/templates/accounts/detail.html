@@ -1,9 +1,23 @@
 {% extends '../base/base.html' %}
+{% load static %}
+
+
 {% block content %}
+
   <div class="row mt-5 text-center justify-content-center">
-    <h1 class="my-5">{{ user.username }}님의 프로필</h1>
-    <p class="mb-4">이메일 :{{ user.email }}</p>
+    <h1 class="mt-5">{{ user.username }}님의 프로필</h1>
+
+    {% if user.image_thumbnail %}
+      <div class="mt-5">
+        <img src={{ user.image_thumbnail.url }} alt="profile image">
+      </div>
+    {% endif %}
+
+
+    <p class="mt-4">이메일 :{{ user.email }}</p>
+
     <p>팔로우 : {{ user.followings.count }} | 팔로워 : {{ user.followers.count }}</p>
+
     {% if request.user != user %}
     <a href="{% url 'follow' user.pk %}">
       {% if request.user in user.followers.all %}
@@ -12,6 +26,7 @@
       팔로우
       {% endif %}
     </a>
+
     {% endif %}
     <div>
       글작성수 : {{reviews.count}} 개

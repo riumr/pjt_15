@@ -45,9 +45,10 @@ import googlemaps
 # Account_View
 def signup(request):
     if request.method == "POST":
-        form = CustomUserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            login = form.save()
+            auth_login(request, login)
             return redirect("index")
     else:
         form = CustomUserCreationForm()
@@ -97,7 +98,7 @@ def logout(request):
 @login_required
 def edit(request, pk):
     if request.method == "POST":
-        form = CustomUserChangeForm(request.POST, instance=request.user)
+        form = CustomUserChangeForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
             form.save()
             return redirect("detail", request.user.pk)
@@ -183,12 +184,16 @@ def review_detail(request, pk):
     review = Review.objects.get(pk=pk)
     comment_form = CommentForm()
 
-    location = review.location
-    gmaps = googlemaps.Client(key="AIzaSyCyVj2SsrSGeHVWM1uawHssRzDyTuW8Yuo")
-    geocode_result = gmaps.geocode((location), language="ko")
+    if review.location:
+        location = review.location
+        gmaps = googlemaps.Client(key="AIzaSyCyVj2SsrSGeHVWM1uawHssRzDyTuW8Yuo")
+        geocode_result = gmaps.geocode((location), language="ko")
 
-    lat = geocode_result[0]["geometry"]["location"]["lat"]
-    lng = geocode_result[0]["geometry"]["location"]["lng"]
+        lat = geocode_result[0]["geometry"]["location"]["lat"]
+        lng = geocode_result[0]["geometry"]["location"]["lng"]
+    else:
+        lat = 37.5014
+        lng = 127.0396
 
     context = {
         "review": review,

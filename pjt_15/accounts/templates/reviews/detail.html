@@ -12,20 +12,23 @@
 
 {% block content %}
 
-{% comment %} 지도 {% endcomment %}
-<h3>My Google Maps Demo</h3>
-
-<!--The div element for the map -->
-<div id="map"></div>
 
 <h2>{{ review.title}}</h2>
-<p>{{ review.created_at|date:"SHORT_DATETIME_FORMAT" }} | {{ review.updated_at|date:"y-m-d D" }}</p>
+{% if review.author.image_thumbnail %}
+  <p><img src="{{ review.author.image_thumbnail.url }}" alt=""></p>
+{% endif %}
+<p>{{ review.created_at|date:"SHORT_DATETIME_FORMAT" }}</p>
 <p>{{ review.content }} </p>
+
+{% if lat %}
+  {% comment %} 지도 {% endcomment %}
+  <div id="map"></div>
+{% endif %}
 
 
 {% comment %} 이미지 {% endcomment %}
 {% if review.image %}
-<img src="{{ review.image.url }}" alt="{{ review.image }}" width="400" height="300">
+  <img src="{{ review.image.url }}" alt="{{ review.image }}" width="400" height="300">
 {% endif %}
 
 {% comment %} 좋아요 {% endcomment %}
@@ -133,9 +136,7 @@
       lat: {{ lat }},
       lng: {{ lng }},
     };
-
     
-
     // The map, centered at geocode_result
     const map = new google
       .maps

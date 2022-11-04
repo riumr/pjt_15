@@ -11,6 +11,13 @@ class User(AbstractUser):
     followings = models.ManyToManyField(
         "self", symmetrical=False, related_name="followers"
     )
+    image_thumbnail = ProcessedImageField(
+        upload_to="images/",
+        blank=True,
+        processors=[ResizeToFill(160, 90)],
+        format="JPEG",
+        options={"quality": 95},
+    )
 
 
 class Review(models.Model):
@@ -23,7 +30,7 @@ class Review(models.Model):
         blank=True,
         processors=[ResizeToFill(1200, 960)],
         format="JPEG",
-        options={"quality": 80},
+        options={"quality": 95},
     )
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default="", null=True
