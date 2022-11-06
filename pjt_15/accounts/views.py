@@ -251,8 +251,12 @@ def follow(request, pk):
 
 
 # 검색기능 : 검색 텍스트만 보내주는 페이지
-def search(request):
-    return render(request, "reviews/search.html")
+def search_input(request):
+    if request.method == "POST":
+        search_text = request.POST.get("user_search")
+        return redirect("search_result", search_text)  # 검색 텍스트를 전송한다.
+    else:
+        return render(request, "reviews/search_input.html")
 
 
 # 검색결과 : 검색 결과만 보여주는 페이지
