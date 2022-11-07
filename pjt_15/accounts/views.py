@@ -176,17 +176,49 @@ def review_delete(request, pk):
 
 def index(request):
     reviews = Review.objects.order_by("-pk")
-    context = {"reviews": reviews}
+    # 좋아요순
+    likes = Review.objects.all()
+    results = []
+    for like in likes:
+        results.append((like, like.like_users.count()))
+    results.sort(key=lambda x:-x[1])
+    
+    like_results = []
+    for result in results:
+        like_results.append(result[0])
+
+    # 별점순
+    rate_reviews = Review.objects.all()
+    rate_results = []
+    for review in rate_reviews:
+        grade = 0
+        for query in review.comment_set.all():
+            grade += query.grade
+        if review.comment_set.all():
+            rate_results.append((review, round(grade/len(review.comment_set.all())),2))
+        else:
+            rate_results.append((review, 0)) 
+    rate_results.sort(key=lambda x:-x[1])
+    
+    new_rate_results = []
+    for result in rate_results:
+        new_rate_results.append(result[0])
+    
+    context = {
+        "reviews": reviews[:4],
+        "like_results": like_results[:4],
+        "rate_results": new_rate_results[:4],
+    }
     return render(request, "accounts/index.html", context)
 
 
 def review_detail(request, pk):
     review = Review.objects.get(pk=pk)
     comment_form = CommentForm()
+
     rate = 0
     for query in review.comment_set.all():
         rate += query.grade
-
     
     if review.comment_set.all(): 
         rate_result = round(rate/len(review.comment_set.all()),2)
