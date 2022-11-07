@@ -1,7 +1,17 @@
 {% extends '../base/base.html' %}
 
 {% block content %}
+
 <h1 class='d-flex justify-content-center p-5 mb-5'>추천 여행지 베스트 10</h1>
+<!-- 검색창 -->
+<form class='mb-4' action="{% url 'search_input' %}" method="GET">
+    <div class="row">
+      <div>
+        <input id="search" class='form-control form-control-lg' type="text" placeholder='위치를 입력해주세요' name="user_search">
+      </div>
+    </div>
+</form>
+
 <div class="container">
     {% for i in result %}
     <div class="row">

@@ -7,6 +7,15 @@
 
 
 {% block content %}
+<!-- 검색창 -->
+<form class='mb-4' action="{% url 'search_input' %}" method="GET">
+  <div class="row">
+    <div>
+      <input id="search" class='form-control form-control-lg' type="text" placeholder='위치를 입력해주세요' name="user_search">
+    </div>
+  </div>
+</form>
+
   <h3 class="text-center my-3">어디갈래? 여기갈래!</h3>
   <div id="carousel-index-new" class="carousel slide" data-bs-ride="true">
     <div class="carousel-indicators">
