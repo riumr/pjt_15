@@ -162,8 +162,8 @@ def index(request):
     results = []
     for like in likes:
         results.append((like, like.like_users.count()))
-    results.sort(key=lambda x:-x[1])
-    
+    results.sort(key=lambda x: -x[1])
+
     like_results = []
     for result in results:
         like_results.append(result[0])
@@ -176,20 +176,21 @@ def index(request):
         for query in review.comment_set.all():
             grade += query.grade
         if review.comment_set.all():
-            rate_results.append((review, round(grade/len(review.comment_set.all())),2))
+            rate_results.append(
+                (review, round(grade / len(review.comment_set.all())), 2)
+            )
         else:
-            rate_results.append((review, 0)) 
-    rate_results.sort(key=lambda x:-x[1])
-    
+            rate_results.append((review, 0))
+    rate_results.sort(key=lambda x: -x[1])
+
     new_rate_results = []
     for result in rate_results:
         new_rate_results.append(result[0])
-    
+
     context = {
         "reviews": reviews[:4],
         "like_results": like_results[:4],
         "rate_results": new_rate_results[:4],
-
     }
     return render(request, "accounts/index.html", context)
 
@@ -202,9 +203,8 @@ def review_detail(request, pk):
     for query in review.comment_set.all():
         rate += query.grade
 
-    
-    if review.comment_set.all(): 
-        rate_result = round(rate/len(review.comment_set.all()),2)
+    if review.comment_set.all():
+        rate_result = round(rate / len(review.comment_set.all()), 2)
 
     else:
         rate_result = "평점없음"
@@ -286,8 +286,6 @@ def search_input(request):
     if request.method == "GET":
         search_text = request.GET.get("user_search")
         return redirect("search_result", search_text)  # 검색 텍스트를 전송한다.
-    else:
-        return render(request, "reviews/search_input.html")
 
 
 # 검색결과 : 검색 결과만 보여주는 페이지
@@ -308,3 +306,8 @@ def search_result(request, search_text):
         "page_obj": page_obj,
     }
     return render(request, "reviews/search_result.html", context)
+
+
+# no result
+def no_result(request):
+    return render(request, "reviews/no_page_alert.html")
