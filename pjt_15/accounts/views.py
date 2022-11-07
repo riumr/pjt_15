@@ -10,6 +10,9 @@ from .models import Review, Comment
 from django.contrib import messages
 from django.http import JsonResponse
 
+# 페이지네이션 구현
+from django.core.paginator import Paginator
+
 # 지도 구현 라이브러리
 import folium
 
@@ -17,30 +20,6 @@ import folium
 import googlemaps
 
 # Create your views here.
-
-
-# def test(request, pk):
-
-#     review = Review.objects.get(pk=pk)
-#     comment_form = CommentForm()
-
-#     location = review.location
-#     gmaps = googlemaps.Client(key="AIzaSyCyVj2SsrSGeHVWM1uawHssRzDyTuW8Yuo")
-#     geocode_result = gmaps.geocode((location), language="ko")
-
-#     lat = geocode_result[0]["geometry"]["location"]["lat"]
-#     lng = geocode_result[0]["geometry"]["location"]["lng"]
-
-#     context = {
-#         "review": review,
-#         "comments": review.comment_set.all(),
-#         "comment_form": comment_form,
-#         "geocode_result": geocode_result,
-#         "lat": lat,
-#         "lng": lng,
-#     }
-#     return render(request, "reviews/test.html", context)
-
 
 # Account_View
 def signup(request):
@@ -176,6 +155,7 @@ def review_delete(request, pk):
 
 def index(request):
     reviews = Review.objects.order_by("-pk")
+
     # 좋아요순
     likes = Review.objects.all()
     results = []
@@ -208,6 +188,7 @@ def index(request):
         "reviews": reviews[:4],
         "like_results": like_results[:4],
         "rate_results": new_rate_results[:4],
+
     }
     return render(request, "accounts/index.html", context)
 
@@ -219,11 +200,13 @@ def review_detail(request, pk):
     rate = 0
     for query in review.comment_set.all():
         rate += query.grade
+
     
     if review.comment_set.all(): 
         rate_result = round(rate/len(review.comment_set.all()),2)
+
     else:
-        rate_result = '평점없음'
+        rate_result = "평점없음"
 
     if review.location:
         location = review.location
@@ -299,7 +282,7 @@ def follow(request, pk):
 
 # 검색기능 : 검색 텍스트만 보내주는 페이지
 def search_input(request):
-    if request.method == "POST":
+    if request.method == "GET":
         search_text = request.POST.get("user_search")
         return redirect("search_result", search_text)  # 검색 텍스트를 전송한다.
     else:
@@ -308,6 +291,13 @@ def search_input(request):
 
 # 검색결과 : 검색 결과만 보여주는 페이지
 def search_result(request, search_text):
+
+    # 페이지네이션
+    review = Review.objects.order_by("pk")
+    pages = Paginator(review, 10)
+    page_number = request.GET.get("page")
+    page_obj = pages.get_page(page_number)
+
     # Review 테이블에 리뷰가 있으면
     if Review:
         result = Review.objects.filter(
@@ -319,15 +309,21 @@ def search_result(request, search_text):
             ).values()  # 값을 반환한다.
             context = {
                 "result": result,
+                "pages": pages,
+                "page_obj": page_obj,
             }
         else:  # 필터링한 결과가 존재하지 않으면, 아무 리뷰나 표시하도록 한다.
             context = {
                 "result": "anything",
+                "pages": pages,
+                "page_obj": page_obj,
             }
     # Review 테이블에 값이 없으면
     else:
         result = "no review"
         context = {
             "result": result,
+            "pages": pages,
+            "page_obj": page_obj,
         }
     return render(request, "reviews/search_result.html", context)

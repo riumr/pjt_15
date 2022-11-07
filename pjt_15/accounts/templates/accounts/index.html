@@ -1,28 +1,43 @@
 {% extends '../base/base.html' %}
 {% load static %}
+{% load django_bootstrap5 %}
+
+
+
+
 
 {% block content %}
-
-  <div class="accounts-index position-relative">
-    {% comment %} 게시판 {% endcomment %}
-    <div class="row">
-      {% for review in reviews %}
-      <div class="col-3">
-        <div class="card position-absolute">
-          {% if image %}
-            <img src="{{ review.image.url }}" class="card-img-top" alt="...">
-          {% endif %}
-          <div class="card-body">
-            <h5 class="card-title">{{ review.title }}</h5>
-            <p>작성자:
-              {{review.author.username}}</p>
-            <a href="{% url 'review-detail' review.pk %}" class="btn btn-outline-primary my-3">자세히보기</a>
-          </div>
-        </div>
-      </div>
-      {% endfor %}
+  <h3 class="text-center my-3">최신</h3>
+  <div id="carousel-index-new" class="carousel slide" data-bs-ride="true">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carousel-index-new" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carousel-index-new" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carousel-index-new" data-bs-slide-to="2" aria-label="Slide 3"></button>
     </div>
+
+    <div class="carousel-inner">
+
+      {% for review in reviews %}
+        <div class="carousel-item active">
+          {% if review.image %}
+            <img src={{ review.image.url }} class="d-block w-100" alt="...">
+          {% else %}
+            <img src="{% static 'photo/1.jpeg' %}" class="d-block w-100" alt="...">
+          {% endif %}
+        </div>
+      {% endfor %}
+
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carousel-index-new" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carousel-index-new" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
   </div>
+
 
   <hr>
   <div class="accounts-index position-relative">
@@ -66,11 +81,20 @@
       </div>
       {% endfor %}
     </div>
+
   </div>
 
+  <hr>
   {% comment %} 글쓰기 버튼 {% endcomment %}
   <div class="d-flex justify-content-end">
     <a class="btn btn-primary my-3 float-right" href="{% url 'review-create' %}">글 쓰기</a>
   </div>
+
+
+
+{% comment %} 스크립트 {% endcomment %} 
+<script>
+
+</script>
 
 {% endblock content %}
