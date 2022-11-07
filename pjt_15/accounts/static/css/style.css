@@ -6,6 +6,12 @@
     /* The width is the width of the web page */
   }
 
+#carousel-index-like, #carousel-index-rate, #carousel-index-new  {
+  overflow: hidden;
+}
+
+
+
 .carousel-inner {
   width: 100vw;
   height: 400px;
@@ -13,8 +19,10 @@
 
 .carousel-inner img {
   width: 100%;
-  min-height: 50vw;
+  min-height: 50vh;
 }
+
+/* ######################################################## */
 
 .accounts-index {
   height: 25vh;

@@ -18,30 +18,6 @@ import googlemaps
 
 # Create your views here.
 
-
-# def test(request, pk):
-
-#     review = Review.objects.get(pk=pk)
-#     comment_form = CommentForm()
-
-#     location = review.location
-#     gmaps = googlemaps.Client(key="AIzaSyCyVj2SsrSGeHVWM1uawHssRzDyTuW8Yuo")
-#     geocode_result = gmaps.geocode((location), language="ko")
-
-#     lat = geocode_result[0]["geometry"]["location"]["lat"]
-#     lng = geocode_result[0]["geometry"]["location"]["lng"]
-
-#     context = {
-#         "review": review,
-#         "comments": review.comment_set.all(),
-#         "comment_form": comment_form,
-#         "geocode_result": geocode_result,
-#         "lat": lat,
-#         "lng": lng,
-#     }
-#     return render(request, "reviews/test.html", context)
-
-
 # Account_View
 def signup(request):
     if request.method == "POST":
@@ -176,7 +152,9 @@ def review_delete(request, pk):
 
 def index(request):
     reviews = Review.objects.order_by("-pk")
-    context = {"reviews": reviews}
+    context = {
+        "reviews": reviews,
+    }
     return render(request, "accounts/index.html", context)
 
 
@@ -187,11 +165,10 @@ def review_detail(request, pk):
     for query in review.comment_set.all():
         rate += query.grade
 
-    
-    if review.comment_set.all(): 
-        rate_result = round(rate/len(review.comment_set.all()),2)
+    if review.comment_set.all():
+        rate_result = round(rate / len(review.comment_set.all()), 2)
     else:
-        rate_result = '평점없음'
+        rate_result = "평점없음"
 
     if review.location:
         location = review.location
