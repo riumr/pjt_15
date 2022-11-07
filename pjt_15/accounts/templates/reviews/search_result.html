@@ -8,18 +8,21 @@
         <div class="p-2 bg-light col-4">{{i.image}}</div>
         <div class="card col-8 mb-4 rounded-0">
             <div class="card-body">
-                <h3 class="card-title">{{i.pk}}. 리뷰 제목 : {{i.title}}</h3>
+                <h3 class="card-title">{{i.pk}}. 여행지명 {{i.title}}
+                    <span>별점</span>
+                </h3>
                 <h5 class="card-subtitle text-muted my-2">여행지 주소 : {{i.location}}</h5>
                 <p>
                     <span class="fw-bold">리뷰 작성자{{i.author_id}}</span>
                     <span>리뷰 내용 {{i.content}}</span>
                 </p>
                 <p>대륙 : {{i.category}}</p>
-                <a href="{}" class="btn btn-outline-primary my-3">자세히보기 : 리뷰 상세페이지로 이동</a>
+                <!-- 수정 필요 -->
+                <a href="{% url 'detail' i.pk %}" class="btn btn-outline-primary my-3">자세히보기 : 리뷰 상세페이지로 이동</a> 
+
             </div>
         </div>
     </div>
-    <hr>
     {% endfor %}
     <div>
 <ul class="pagination my-5 d-flex justify-content-center">

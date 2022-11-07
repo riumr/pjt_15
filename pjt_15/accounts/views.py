@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Review, Comment
 from django.contrib import messages
 from django.http import JsonResponse
+from django.db.models import Q
 
 # 페이지네이션 구현
 from django.core.paginator import Paginator
@@ -248,7 +249,7 @@ def follow(request, pk):
 # 검색기능 : 검색 텍스트만 보내주는 페이지
 def search_input(request):
     if request.method == "GET":
-        search_text = request.POST.get("user_search")
+        search_text = request.GET.get("user_search")
         return redirect("search_result", search_text)  # 검색 텍스트를 전송한다.
     else:
         return render(request, "reviews/search_input.html")
@@ -258,37 +259,17 @@ def search_input(request):
 def search_result(request, search_text):
 
     # 페이지네이션
-    review = Review.objects.order_by("pk")
+    review = Review.objects.order_by("pk").filter(
+        Q(location__icontains=search_text)
+        | Q(title__icontains=search_text)
+        | Q(content__icontains=search_text)  # 세가지 조건 중 하나라도 만족하면 결과가 나온다.
+    )
     pages = Paginator(review, 10)
-    page_number = request.GET.get("page")
-    page_obj = pages.get_page(page_number)
+    page_number = request.GET.get("page")  # 현재 페이지
+    page_obj = pages.get_page(page_number)  # 현재 페이지의 객체들
 
-    # Review 테이블에 리뷰가 있으면
-    if Review:
-        result = Review.objects.filter(
-            location__icontains=search_text  # 검색창에서 값을 받을 수 있다
-        ).values()  # 결과는 검색한 텍스트를 포함하고 있는 위치 컬럼을 기준으로 필터링한다.
-        if result.exists():  # 필터링한 결과가 존재하면
-            result = Review.objects.filter(
-                location__icontains=search_text
-            ).values()  # 값을 반환한다.
-            context = {
-                "result": result,
-                "pages": pages,
-                "page_obj": page_obj,
-            }
-        else:  # 필터링한 결과가 존재하지 않으면, 아무 리뷰나 표시하도록 한다.
-            context = {
-                "result": "anything",
-                "pages": pages,
-                "page_obj": page_obj,
-            }
-    # Review 테이블에 값이 없으면
-    else:
-        result = "no review"
-        context = {
-            "result": result,
-            "pages": pages,
-            "page_obj": page_obj,
-        }
+    context = {
+        "pages": pages,
+        "page_obj": page_obj,
+    }
     return render(request, "reviews/search_result.html", context)
