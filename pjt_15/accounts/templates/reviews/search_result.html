@@ -1,0 +1,20 @@
+{% extends '../base/base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1 class='d-flex justify-content-center p-5 mb-5'>추천 여행지 베스트 10</h1>
+    {% for i in result %}
+    <div class="row">
+        <div class="p-2 bg-light col-4">{{i.image}}</div>
+        <div class="card col-8 mb-4">
+            <div class="card-body">
+                <h1 class="card-title">리뷰 제목 : {{i.title}}</h1>
+                <p>여행지 주소 : {{i.location}}</p>
+                <p>리뷰 작성자 : {{i.author_id}} <span>리뷰 내용 : {{i.content}}</span></p>
+                <a href={} class="btn btn-outline-primary my-3">자세히보기 : 리뷰 상세페이지로 이동</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}
