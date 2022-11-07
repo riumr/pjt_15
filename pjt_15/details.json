@@ -1,0 +1,482 @@
+[
+{
+  "model": "accounts.review",
+  "pk": 1,
+  "fields": {
+    "title": "타이틀_01",
+    "content": "내용_01",
+    "created_at": "2022-11-07T02:01:29.325Z",
+    "updated_at": "2022-11-07T02:01:29.325Z",
+    "image": "images/3_OcwSTa5.jpeg",
+    "author": 2,
+    "location": "파리",
+    "category": "유럽",
+    "like_users": []
+  }
+},
+{
+  "model": "accounts.review",
+  "pk": 2,
+  "fields": {
+    "title": "타이틀_02",
+    "content": "내용_02",
+    "created_at": "2022-11-07T02:01:29.325Z",
+    "updated_at": "2022-11-07T02:01:29.325Z",
+    "image": "images/3_OcwSTa5.jpeg",
+    "author": 2,
+    "location": "네덜란드",
+    "category": "유럽",
+    "like_users": []
+  }
+},
+{
+  "model": "accounts.review",
+  "pk": 3,
+  "fields": {
+    "title": "타이틀_01",
+    "content": "내용_01",
+    "created_at": "2022-11-07T02:01:29.325Z",
+    "updated_at": "2022-11-07T02:01:29.325Z",
+    "image": "images/3_OcwSTa5.jpeg",
+    "author": 2,
+    "location": "영국",
+    "category": "유럽",
+    "like_users": []
+  }
+},
+{
+  "model": "accounts.review",
+  "pk": 4,
+  "fields": {
+    "title": "타이틀_01",
+    "content": "내용_01",
+    "created_at": "2022-11-07T02:01:29.325Z",
+    "updated_at": "2022-11-07T02:01:29.325Z",
+    "image": "images/3_OcwSTa5.jpeg",
+    "author": 2,
+    "location": "독일",
+    "category": "유럽",
+    "like_users": []
+  }
+},
+{
+  "model": "accounts.review",
+  "pk": 5,
+  "fields": {
+    "title": "타이틀_01",
+    "content": "내용_01",
+    "created_at": "2022-11-07T02:01:29.325Z",
+    "updated_at": "2022-11-07T02:01:29.325Z",
+    "image": "images/3_OcwSTa5.jpeg",
+    "author": 2,
+    "location": "스페인",
+    "category": "유럽",
+    "like_users": []
+  }
+},
+{
+  "model": "accounts.review",
+  "pk": 6,
+  "fields": {
+    "title": "타이틀_01",
+    "content": "내용_01",
+    "created_at": "2022-11-07T02:01:29.325Z",
+    "updated_at": "2022-11-07T02:01:29.325Z",
+    "image": "images/3_OcwSTa5.jpeg",
+    "author": 2,
+    "location": "벨기에",
+    "category": "유럽",
+    "like_users": []
+  }
+},
+{
+  "model": "accounts.review",
+  "pk": 7,
+  "fields": {
+    "title": "타이틀_01",
+    "content": "내용_01",
+    "created_at": "2022-11-07T02:01:29.325Z",
+    "updated_at": "2022-11-07T02:01:29.325Z",
+    "image": "images/3_OcwSTa5.jpeg",
+    "author": 2,
+    "location": "스위스",
+    "category": "유럽",
+    "like_users": []
+  }
+},
+{
+  "model": "accounts.review",
+  "pk": 8,
+  "fields": {
+    "title": "타이틀_01",
+    "content": "내용_01",
+    "created_at": "2022-11-07T02:01:29.325Z",
+    "updated_at": "2022-11-07T02:01:29.325Z",
+    "image": "images/3_OcwSTa5.jpeg",
+    "author": 2,
+    "location": "미국",
+    "category": "북아메리카",
+    "like_users": []
+  }
+},
+{
+  "model": "accounts.review",
+  "pk": 9,
+  "fields": {
+    "title": "타이틀_01",
+    "content": "내용_01",
+    "created_at": "2022-11-07T02:01:29.325Z",
+    "updated_at": "2022-11-07T02:01:29.325Z",
+    "image": "images/3_OcwSTa5.jpeg",
+    "author": 2,
+    "location": "뉴욕",
+    "category": "북아메리카",
+    "like_users": []
+  }
+},
+{
+  "model": "accounts.review",
+  "pk": 10,
+  "fields": {
+    "title": "타이틀_01",
+    "content": "내용_01",
+    "created_at": "2022-11-07T02:01:29.325Z",
+    "updated_at": "2022-11-07T02:01:29.325Z",
+    "image": "images/3_OcwSTa5.jpeg",
+    "author": 2,
+    "location": "샌프란시스코",
+    "category": "북아메리카",
+    "like_users": []
+  }
+},
+{
+  "model": "accounts.review",
+  "pk": 11,
+  "fields": {
+    "title": "타이틀_01",
+    "content": "내용_01",
+    "created_at": "2022-11-07T02:01:29.325Z",
+    "updated_at": "2022-11-07T02:01:29.325Z",
+    "image": "images/3_OcwSTa5.jpeg",
+    "author": 2,
+    "location": "텍사스",
+    "category": "북아메리카",
+    "like_users": []
+  }
+},
+{
+  "model": "accounts.review",
+  "pk": 12,
+  "fields": {
+    "title": "타이틀_01",
+    "content": "내용_01",
+    "created_at": "2022-11-07T02:01:29.325Z",
+    "updated_at": "2022-11-07T02:01:29.325Z",
+    "image": "images/3_OcwSTa5.jpeg",
+    "author": 2,
+    "location": "아이오와",
+    "category": "북아메리카",
+    "like_users": []
+  }
+},
+{
+  "model": "accounts.review",
+  "pk": 13,
+  "fields": {
+    "title": "타이틀_01",
+    "content": "내용_01",
+    "created_at": "2022-11-07T02:01:29.325Z",
+    "updated_at": "2022-11-07T02:01:29.325Z",
+    "image": "images/3_OcwSTa5.jpeg",
+    "author": 2,
+    "location": "뉴욕",
+    "category": "북아메리카",
+    "like_users": []
+  }
+},
+{
+  "model": "accounts.review",
+  "pk": 14,
+  "fields": {
+    "title": "타이틀_01",
+    "content": "내용_01",
+    "created_at": "2022-11-07T02:01:29.325Z",
+    "updated_at": "2022-11-07T02:01:29.325Z",
+    "image": "images/3_OcwSTa5.jpeg",
+    "author": 2,
+    "location": "LA",
+    "category": "북아메리카",
+    "like_users": []
+  }
+},
+{
+  "model": "accounts.review",
+  "pk": 15,
+  "fields": {
+    "title": "타이틀_01",
+    "content": "내용_01",
+    "created_at": "2022-11-07T02:01:29.325Z",
+    "updated_at": "2022-11-07T02:01:29.325Z",
+    "image": "images/3_OcwSTa5.jpeg",
+    "author": 2,
+    "location": "아틀랜타",
+    "category": "북아메리카",
+    "like_users": []
+  }
+},
+{
+  "model": "accounts.review",
+  "pk": 16,
+  "fields": {
+    "title": "타이틀_01",
+    "content": "내용_01",
+    "created_at": "2022-11-07T02:01:29.325Z",
+    "updated_at": "2022-11-07T02:01:29.325Z",
+    "image": "images/3_OcwSTa5.jpeg",
+    "author": 2,
+    "location": "캐나다",
+    "category": "북아메리카",
+    "like_users": []
+  }
+},
+{
+  "model": "accounts.review",
+  "pk": 17,
+  "fields": {
+    "title": "타이틀_01",
+    "content": "내용_01",
+    "created_at": "2022-11-07T02:01:29.325Z",
+    "updated_at": "2022-11-07T02:01:29.325Z",
+    "image": "images/3_OcwSTa5.jpeg",
+    "author": 2,
+    "location": "브라질",
+    "category": "남아메리카",
+    "like_users": []
+  }
+},
+{
+  "model": "accounts.review",
+  "pk": 18,
+  "fields": {
+    "title": "타이틀_01",
+    "content": "내용_01",
+    "created_at": "2022-11-07T02:01:29.325Z",
+    "updated_at": "2022-11-07T02:01:29.325Z",
+    "image": "images/3_OcwSTa5.jpeg",
+    "author": 2,
+    "location": "아르헨티나",
+    "category": "남아메리카",
+    "like_users": []
+  }
+},
+{
+  "model": "accounts.review",
+  "pk": 19,
+  "fields": {
+    "title": "타이틀_01",
+    "content": "내용_01",
+    "created_at": "2022-11-07T02:01:29.325Z",
+    "updated_at": "2022-11-07T02:01:29.325Z",
+    "image": "images/3_OcwSTa5.jpeg",
+    "author": 2,
+    "location": "멕시코",
+    "category": "남아메리카",
+    "like_users": []
+  }
+},
+{
+  "model": "accounts.review",
+  "pk": 20,
+  "fields": {
+    "title": "타이틀_01",
+    "content": "내용_01",
+    "created_at": "2022-11-07T02:01:29.325Z",
+    "updated_at": "2022-11-07T02:01:29.325Z",
+    "image": "images/3_OcwSTa5.jpeg",
+    "author": 2,
+    "location": "칠레",
+    "category": "남아메리카",
+    "like_users": []
+  }
+},
+{
+  "model": "accounts.review",
+  "pk": 21,
+  "fields": {
+    "title": "타이틀_01",
+    "content": "내용_01",
+    "created_at": "2022-11-07T02:01:29.325Z",
+    "updated_at": "2022-11-07T02:01:29.325Z",
+    "image": "images/3_OcwSTa5.jpeg",
+    "author": 2,
+    "location": "중국",
+    "category": "아시아",
+    "like_users": []
+  }
+},
+{
+  "model": "accounts.review",
+  "pk": 22,
+  "fields": {
+    "title": "타이틀_01",
+    "content": "내용_01",
+    "created_at": "2022-11-07T02:01:29.325Z",
+    "updated_at": "2022-11-07T02:01:29.325Z",
+    "image": "images/3_OcwSTa5.jpeg",
+    "author": 2,
+    "location": "일본",
+    "category": "아시아",
+    "like_users": []
+  }
+},
+{
+  "model": "accounts.review",
+  "pk": 23,
+  "fields": {
+    "title": "타이틀_01",
+    "content": "내용_01",
+    "created_at": "2022-11-07T02:01:29.325Z",
+    "updated_at": "2022-11-07T02:01:29.325Z",
+    "image": "images/3_OcwSTa5.jpeg",
+    "author": 2,
+    "location": "베트남",
+    "category": "아시아",
+    "like_users": []
+  }
+},
+{
+  "model": "accounts.review",
+  "pk": 24,
+  "fields": {
+    "title": "타이틀_01",
+    "content": "내용_01",
+    "created_at": "2022-11-07T02:01:29.325Z",
+    "updated_at": "2022-11-07T02:01:29.325Z",
+    "image": "images/3_OcwSTa5.jpeg",
+    "author": 2,
+    "location": "대만",
+    "category": "아시아",
+    "like_users": []
+  }
+},
+{
+  "model": "accounts.review",
+  "pk": 25,
+  "fields": {
+    "title": "타이틀_01",
+    "content": "내용_01",
+    "created_at": "2022-11-07T02:01:29.325Z",
+    "updated_at": "2022-11-07T02:01:29.325Z",
+    "image": "images/3_OcwSTa5.jpeg",
+    "author": 2,
+    "location": "서울",
+    "category": "국내",
+    "like_users": []
+  }
+},
+{
+  "model": "accounts.review",
+  "pk": 26,
+  "fields": {
+    "title": "타이틀_01",
+    "content": "내용_01",
+    "created_at": "2022-11-07T02:01:29.325Z",
+    "updated_at": "2022-11-07T02:01:29.325Z",
+    "image": "images/3_OcwSTa5.jpeg",
+    "author": 2,
+    "location": "제주도",
+    "category": "국내",
+    "like_users": []
+  }
+},
+{
+  "model": "accounts.review",
+  "pk": 27,
+  "fields": {
+    "title": "타이틀_01",
+    "content": "내용_01",
+    "created_at": "2022-11-07T02:01:29.325Z",
+    "updated_at": "2022-11-07T02:01:29.325Z",
+    "image": "images/3_OcwSTa5.jpeg",
+    "author": 2,
+    "location": "부산",
+    "category": "국내",
+    "like_users": []
+  }
+},
+{
+  "model": "accounts.review",
+  "pk": 28,
+  "fields": {
+    "title": "타이틀_01",
+    "content": "내용_01",
+    "created_at": "2022-11-07T02:01:29.325Z",
+    "updated_at": "2022-11-07T02:01:29.325Z",
+    "image": "images/3_OcwSTa5.jpeg",
+    "author": 2,
+    "location": "수원",
+    "category": "국내",
+    "like_users": []
+  }
+},
+{
+  "model": "accounts.review",
+  "pk": 28,
+  "fields": {
+    "title": "타이틀_01",
+    "content": "내용_01",
+    "created_at": "2022-11-07T02:01:29.325Z",
+    "updated_at": "2022-11-07T02:01:29.325Z",
+    "image": "images/3_OcwSTa5.jpeg",
+    "author": 2,
+    "location": "대구",
+    "category": "국내",
+    "like_users": []
+  }
+},
+{
+  "model": "accounts.review",
+  "pk": 29,
+  "fields": {
+    "title": "타이틀_01",
+    "content": "내용_01",
+    "created_at": "2022-11-07T02:01:29.325Z",
+    "updated_at": "2022-11-07T02:01:29.325Z",
+    "image": "images/3_OcwSTa5.jpeg",
+    "author": 2,
+    "location": "인천",
+    "category": "국내",
+    "like_users": []
+  }
+},
+{
+  "model": "accounts.review",
+  "pk": 30,
+  "fields": {
+    "title": "타이틀_01",
+    "content": "내용_01",
+    "created_at": "2022-11-07T02:01:29.325Z",
+    "updated_at": "2022-11-07T02:01:29.325Z",
+    "image": "images/3_OcwSTa5.jpeg",
+    "author": 2,
+    "location": "뉴질랜드",
+    "category": "오세아니아",
+    "like_users": []
+  }
+},
+{
+  "model": "accounts.review",
+  "pk": 31,
+  "fields": {
+    "title": "타이틀_01",
+    "content": "내용_01",
+    "created_at": "2022-11-07T02:01:29.325Z",
+    "updated_at": "2022-11-07T02:01:29.325Z",
+    "image": "images/3_OcwSTa5.jpeg",
+    "author": 2,
+    "location": "오스트레일리아",
+    "category": "오세아니아",
+    "like_users": []
+  }
+}
+]

@@ -1,10 +1,16 @@
 {% extends '../base/base.html' %}
 
+{% load social_share %}
+{% post_to_facebook "POST: {{review.title}}" object_or_url "페이스북으로 공유하기" %}
+{% post_to_twitter "POST: {{review.title}}" object_or_url "트위터로 공유하기" %}
+
+
 {% load static %}
 {% load django_bootstrap5 %}
 
 {% block head %}
   <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
 {% endblock head %}
 
 {% block header %}
@@ -52,105 +58,121 @@
 
 
 {% block content %}
+<div class='container'>
 
-<div class="d-flex justify-content-center mt-5">
-  <h1>{{ review.title}}</h1>
-</div>
-
-
-<h2>{{ review.title}} | {{category}} | 전체 평점 : {{rate}}</h2>
-
-
-{% if review.author.image_thumbnail %}
-  <p><img src="{{ review.author.image_thumbnail.url }}" alt=""></p>
-{% endif %}
-<p>{{ review.created_at|date:"SHORT_DATETIME_FORMAT" }}</p>
-<p>{{ review.content }} </p>
-
-{% if lat %}
-  {% comment %} 지도 {% endcomment %}
-  <div id="map"></div>
-{% endif %}
-
-
-{% comment %} 이미지 {% endcomment %}
-{% if review.image %}
-  <img src="{{ review.image.url }}" alt="{{ review.image }}" width="400" height="300">
-{% endif %}
-
-{% comment %} 좋아요 {% endcomment %}
-<div>
-    {% if request.user.is_authenticated %}
-      {% if request.user in review.like_users.all %}
-        <i id="like-btn" data-review-id="{{review.pk}}" class="bi bi-heart-fill"></i>
-      {% else %}
-        <i id="like-btn" data-review-id="{{review.pk}}" class="bi bi-heart"></i></a>
-      {% endif %}
-      <span id="like-count">좋아요: {{ review.like_users.count }}</span>
-    {% endif %}
+  <div class="d-flex justify-content-center mt-5">
+    <h1>{{ review.title}}</h1>
   </div>
-</div>
 
 
-<div class="d-flex justify-content-center mt-5">
-  <h3>공유 버튼</h3>
-</div>
+  <h2>{{ review.title}} | {{category}} | 전체 평점 : {{rate}}</h2>
 
-<hr class="mt-5">
 
-<ul>
-  <li>
-    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laborum, corrupti!
-  <li>
-    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laborum, corrupti!
-  </li>
-  <li>
-    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laborum, corrupti!
-  </li>
-  <li>
-    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laborum, corrupti!
-  </li>
-  <li>
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laborum, corrupti!
-  </li>
-</ul>
+  {% if review.author.image_thumbnail %}
+    <p><img src="{{ review.author.image_thumbnail.url }}"></p>
+  {% endif %}
+  <p>{{ review.created_at|date:"SHORT_DATETIME_FORMAT" }}</p>
+  <p>{{ review.content }} </p>
 
-<hr class="mt-5">
-
-{% if lat %}
-  {% comment %} 지도 {% endcomment %}
-  <div class="mt-5">
+  {% if lat %}
+    {% comment %} 지도 {% endcomment %}
     <div id="map"></div>
+  {% endif %}
+
+
+  {% comment %} 이미지 {% endcomment %}
+  <div class='mt-3'>
+  {% if review.image %}
+    <img src="{{ review.image.url }}" alt="{{ review.image }}" width="100%" height="400">
+  {% endif %}
   </div>
-{% endif %}
 
-<hr class="mt-5">
+  {% comment %} 좋아요 {% endcomment %}
+  <div class='text-center mt-3'>
+      {% if request.user.is_authenticated %}
+        {% if request.user in review.like_users.all %}
+          <i id="like-btn" data-review-id="{{review.pk}}" class="bi bi-heart-fill"></i>
+        {% else %}
+          <i id="like-btn" data-review-id="{{review.pk}}" class="bi bi-heart"></i></a>
+        {% endif %}
+        <span id="like-count">좋아요 ({{ review.like_users.count }})</span>
+      {% endif %}
+    </div>
+  </div>
 
-{% comment %} 이미지 {% endcomment %}
-{% if review.image %}
-  <img src="{{ review.image.url }}" alt="{{ review.image }}" width="400" height="300">
-{% endif %}
 
+  <div class="text-center d-flex-column justify-content-center mt-5">
+    <div class='mb-3'>
+    <h3 class='font-weight-bold'>공유하기</h3>
+    </div>
+    <div class='d-flex justify-content-center'>
+      <div class='mx-2'>
+        <button type="button" class="btn btn-outline-primary">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+        <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"></path>
+        </svg>
+        {% post_to_facebook get_absolute_url "페북으로" %}
+        </button>
+      </div>
+      <div class='mx-2'>
+        <button type="button" class="btn btn-outline-primary">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-twitter" viewBox="0 0 16 16">
+        <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"></path>
+        </svg>
+        {% post_to_twitter get_absolute_url "트위터" "트위터로" %}
+        </button>
+      </div>
+    </div>
+  </div>
 
-{% comment %} 댓글 {% endcomment %}
-{% if request.user.is_authenticated %}
-<h4 class="my-3">댓글</h4>
-<form id="comment-form" data-review-id="{{ review.pk }}">
-    {% csrf_token %}
-    {% bootstrap_form comment_form layout='floating'%}
-    {% bootstrap_button button_type="submit" content="OK" %}
-</form>
-{% endif %}
+  <hr class="mt-5">
 
-<hr class="mt-5">
+  <ul>
+    <li>
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laborum, corrupti!
+    <li>
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laborum, corrupti!
+    </li>
+    <li>
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laborum, corrupti!
+    </li>
+    <li>
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laborum, corrupti!
+    </li>
+    <li>
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laborum, corrupti!
+    </li>
+  </ul>
 
-<div id="comments">
-{% for comment in comments %}
-    <p>{{comment.author.username}} : {{ comment.content }} | 별점 : {% for i in ''|ljust:comment.grade %}⭐{% endfor %}</p>
-    <hr>    
-{% empty %}
-    <p>댓글이 없어요! 댓글을 써보시겠어요?</p>
-{% endfor %}
+  <hr class="mt-3">
+  
+  <div class='text-end'>
+  <button class="btn btn-primary"><a class="text-decoration-none text-light" href="{% url 'index' %}">
+  목록으로</a>
+  </button>
+  </div>
+  {% comment %} 댓글 {% endcomment %}
+  {% if request.user.is_authenticated %}
+  <h4 class="my-3">댓글</h4>
+  <form id="comment-form" data-review-id="{{ review.pk }}">
+      {% csrf_token %}
+      {% bootstrap_form comment_form layout='floating'%}
+      <div class="text-end">
+      {% bootstrap_button button_type="submit" content="댓글달기" %}
+      </div>
+  </form>
+  {% endif %}
+
+  <hr class="mt-5">
+
+  <div id="comments" class='mb-5'>
+  {% for comment in comments %}
+      <p>{{comment.author.username}} : {{ comment.content }} | 별점 : {% for i in ''|ljust:comment.grade %}⭐{% endfor %}</p>
+      <hr>    
+  {% empty %}
+      <p>댓글이 없어요! 댓글을 써보시겠어요?</p>
+  {% endfor %}
+  </div>
 </div>
 
 {% comment %} 좋아요 비동기 {% endcomment %}
