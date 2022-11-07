@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "django_bootstrap5",
     "imagekit",
     "django_social_share",
+    'django_seed',
 ]
 
 MIDDLEWARE = [

@@ -81,9 +81,11 @@
 
 
   {% comment %} 이미지 {% endcomment %}
+  <div class='mt-3'>
   {% if review.image %}
-    <img src="{{ review.image.url }}" alt="{{ review.image }}" width="400" height="300">
+    <img src="{{ review.image.url }}" alt="{{ review.image }}" width="100%" height="400">
   {% endif %}
+  </div>
 
   {% comment %} 좋아요 {% endcomment %}
   <div class='text-center mt-3'>
@@ -123,7 +125,6 @@
     </div>
   </div>
 
-
   <hr class="mt-5">
 
   <ul>
@@ -143,21 +144,22 @@
     </li>
   </ul>
 
-  <hr class="mt-5">
-
-  {% comment %} 이미지 {% endcomment %}
-  {% if review.image %}
-    <img src="{{ review.image.url }}" alt="{{ review.image }}" width="400" height="300">
-  {% endif %}
-
-
+  <hr class="mt-3">
+  
+  <div class='text-end'>
+  <button class="btn btn-primary"><a class="text-decoration-none text-light" href="{% url 'index' %}">
+  목록으로</a>
+  </button>
+  </div>
   {% comment %} 댓글 {% endcomment %}
   {% if request.user.is_authenticated %}
   <h4 class="my-3">댓글</h4>
   <form id="comment-form" data-review-id="{{ review.pk }}">
       {% csrf_token %}
       {% bootstrap_form comment_form layout='floating'%}
-      {% bootstrap_button button_type="submit" content="OK" %}
+      <div class="text-end">
+      {% bootstrap_button button_type="submit" content="댓글달기" %}
+      </div>
   </form>
   {% endif %}
 
