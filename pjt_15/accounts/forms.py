@@ -7,7 +7,11 @@ from .models import Review, Comment
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = get_user_model()
-        fields = ["username", "email", "image_thumbnail"]
+        fields = [
+            "username",
+            "email",
+            "image_thumbnail",
+        ]
 
 
 class CustomUserChangeForm(UserChangeForm):
@@ -24,11 +28,17 @@ class CustomUserChangeForm(UserChangeForm):
 class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
-        fields = ["title", "content", "image","category"]
+        fields = [
+            "title",
+            "content",
+            "image",
+            "category",
+            "location",
+        ]
 
 
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
-        fields = ["content", 'grade']
-        widget = {'grade': forms.RadioSelect}
+        fields = ["content", "grade"]
+        widget = {"grade": forms.RadioSelect}
