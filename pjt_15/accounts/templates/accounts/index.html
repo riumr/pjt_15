@@ -39,70 +39,49 @@
   </div>
 
 
-  <hr class="mb-5">
-  <div>
-    <h3 class="text-center my-3">좋아요</h3>
-    <div id="carousel-index-like" class="carousel slide" data-bs-ride="true">
-      <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carousel-index-like" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carousel-index-like" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carousel-index-like" data-bs-slide-to="2" aria-label="Slide 3"></button>
-      </div>
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img src="{% static 'photo/1.jpeg' %}" class="d-block w-100" alt="...">
-        </div>
-        <div class="carousel-item">
-          <img src="{% static 'photo/1.jpeg' %}" class="d-block w-100" alt="...">
-        </div>
-        <div class="carousel-item">
-          <img src="{% static 'photo/1.jpeg' %}" class="d-block w-100" alt="...">
-        </div>
-        <div class="carousel-item">
-          <img src="{% static 'photo/1.jpeg' %}" class="d-block w-100" alt="...">
+  <hr>
+  <div class="accounts-index position-relative">
+    좋아요 순
+    <div class="row">
+      {% for like in like_results %}
+      <div class="col-3">
+        <div class="card position-absolute">
+          {% if image %}
+            <img src="{{ like.image.url }}" class="card-img-top" alt="...">
+          {% endif %}
+          <div class="card-body">
+            <h5 class="card-title">{{ like.title }}</h5>
+            <p>작성자:
+              {{like.author.username}}</p>
+            <a href="{% url 'review-detail' like.pk %}" class="btn btn-outline-primary my-3">자세히보기</a>
+          </div>
         </div>
       </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carousel-index-like" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carousel-index-like" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
+      {% endfor %}
     </div>
   </div>
 
-  <hr class="mb-5">
-  <h3 class="text-center my-3">별점</h3>
-  <div id="carousel-index-rate" class="carousel slide" data-bs-ride="true">
-    <div class="carousel-indicators">
-      <button type="button" data-bs-target="#carousel-index-rate" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#carousel-index-rate" data-bs-slide-to="1" aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#carousel-index-rate" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  <hr>
+  <div class="accounts-index position-relative">
+    별점 순
+    <div class="row">
+      {% for rate in rate_results %}
+      <div class="col-3">
+        <div class="card position-absolute">
+          {% if image %}
+            <img src="{{ rate.image.url }}" class="card-img-top" alt="...">
+          {% endif %}
+          <div class="card-body">
+            <h5 class="card-title">{{ rate.title }}</h5>
+            <p>작성자:
+              {{rate.author.username}}</p>
+            <a href="{% url 'review-detail' rate.pk %}" class="btn btn-outline-primary my-3">자세히보기</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
     </div>
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="{% static 'photo/1.jpeg' %}" class="d-block w-100" alt="...">
-      </div>
-      <div class="carousel-item">
-        <img src="{% static 'photo/1.jpeg' %}" class="d-block w-100" alt="...">
-      </div>
-      <div class="carousel-item">
-        <img src="{% static 'photo/1.jpeg' %}" class="d-block w-100" alt="...">
-      </div>
-      <div class="carousel-item">
-        <img src="{% static 'photo/1.jpeg' %}" class="d-block w-100" alt="...">
-      </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carousel-index-rate" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carousel-index-rate" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
+
   </div>
 
   <hr>
