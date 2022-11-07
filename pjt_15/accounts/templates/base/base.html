@@ -70,13 +70,7 @@
 
     {% comment %} 메인 {% endcomment %}
     <div class="container mt-5">
-      <form class='mb-4' action="{% url 'search_input' %}" method="GET">
-          <div class="row">
-            <div>
-              <input id="search" class='form-control form-control-lg' type="text" placeholder='위치를 입력해주세요' name="user_search">
-            </div>
-          </div>
-      </form>
+      
       {% block content %}
       {% endblock content %}
     </div>
