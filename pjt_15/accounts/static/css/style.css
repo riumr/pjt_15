@@ -26,10 +26,18 @@
 
 .accounts-index {
   height: 25vh;
-  background-color: orange;
   text-align: center;
 }
 
 a {
   text-decoration: none !important; 
+}
+
+.card-img {
+  background-image: url('../photo/1.jpeg') !important;
+  background-size: 150%;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 1;
+
 }
