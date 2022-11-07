@@ -7,7 +7,7 @@
 
 
 {% block content %}
-  <h3 class="text-center my-3">최신</h3>
+  <h3 class="text-center my-3">어디갈래? 여기갈래!</h3>
   <div id="carousel-index-new" class="carousel slide" data-bs-ride="true">
     <div class="carousel-indicators">
       <button type="button" data-bs-target="#carousel-index-new" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -40,20 +40,20 @@
 
 
   <hr>
-  <div class="accounts-index position-relative">
-    좋아요 순
+  <div class="accounts-index px-2">
+    <h3 class="text-center my-3">좋아요 TOP 4</h3>
     <div class="row">
       {% for like in like_results %}
       <div class="col-3">
-        <div class="card position-absolute">
+        <div class="card-3">
           {% if image %}
             <img src="{{ like.image.url }}" class="card-img-top" alt="...">
           {% endif %}
-          <div class="card-body">
-            <h5 class="card-title">{{ like.title }}</h5>
-            <p>작성자:
+          <div class="card-img">
+            <h5 class="card-title text-white pt-1">{{ like.title }}</h5>
+            <p class="text-white">작성자:
               {{like.author.username}}</p>
-            <a href="{% url 'review-detail' like.pk %}" class="btn btn-outline-primary my-3">자세히보기</a>
+            <a href="{% url 'review-detail' like.pk %}" class="btn btn-outline-primary my-3 text-white">자세히보기</a>
           </div>
         </div>
       </div>
@@ -62,27 +62,27 @@
   </div>
 
   <hr>
-  <div class="accounts-index position-relative">
-    별점 순
+  <div class="accounts-index px-2">
+    <h3 class="text-center my-3">별점 TOP 4</h3>
     <div class="row">
       {% for rate in rate_results %}
       <div class="col-3">
-        <div class="card position-absolute">
+        <div class="card-3">
           {% if image %}
             <img src="{{ rate.image.url }}" class="card-img-top" alt="...">
           {% endif %}
-          <div class="card-body">
-            <h5 class="card-title">{{ rate.title }}</h5>
-            <p>작성자:
+          <div class="card-img">
+            <h5 class="card-title text-white pt-1">{{ rate.title }}</h5>
+            <p class="text-white">작성자:
               {{rate.author.username}}</p>
-            <a href="{% url 'review-detail' rate.pk %}" class="btn btn-outline-primary my-3">자세히보기</a>
+            <a href="{% url 'review-detail' rate.pk %}" class="btn btn-outline-primary my-3 text-white">자세히보기</a>
           </div>
         </div>
       </div>
       {% endfor %}
     </div>
-
   </div>
+
 
   <hr>
   {% comment %} 글쓰기 버튼 {% endcomment %}

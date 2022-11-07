@@ -3,7 +3,7 @@
 {% block content %}
 <h1 class='d-flex justify-content-center p-5 mb-5'>추천 여행지 베스트 10</h1>
 <div class="container">
-    {% for i in page_obj %}
+    {% for i in result %}
     <div class="row">
         <div class="p-2 bg-light col-4">{{i.image}}</div>
         <div class="card col-8 mb-4 rounded-0">
