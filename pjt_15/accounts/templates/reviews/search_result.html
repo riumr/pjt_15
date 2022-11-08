@@ -4,7 +4,7 @@
 <form class='mb-4' action="{% url 'search_input' %}" method="GET">
     <div class="row">
       <div>
-        <input id="search" class='form-control form-control-lg' type="text" placeholder='위치를 입력해주세요' name="user_search">
+        <input id="search" class='form-control form-control-lg' type="text" placeholder='위치, 여행지명 등을 입력해주세요' name="user_search">
       </div>
     </div>
   </form>
@@ -13,16 +13,16 @@
 <div class="container">
     {% for i in page_obj %}
     <div class="row">
-        <div class="p-2 bg-light col-4">{{i.image}}</div>
+        <div class="p-2 bg-light col-4">
+            <img src="{{ review.images.url }}" alt=""></div>
         <div class="card col-8 mb-4 rounded-0">
             <div class="card-body">
-                <h3 class="card-title">{{i.pk}}. 여행지명 {{i.title}}
-                    <span>별점</span>
+                <h3 class="card-title">{{i.pk}}. {{i.title}}
                 </h3>
-                <h5 class="card-subtitle text-muted my-2">여행지 주소 : {{i.location}}</h5>
+                <h5 class="card-subtitle text-muted my-2">{{i.location}}</h5>
                 <div class="row">
-                    <div class="fw-bold col-2">리뷰 작성자{{i.author_id}}</div>
-                    <div class="col-10">리뷰 내용 {{i.content}}</div>
+                    <div class="fw-bold col-2">{{i.author}}</div>
+                    <div class="col-10"> {{i.content}}</div>
                 </div>
                 <p>{{i.category}}</p>
                 <a href="{% url 'review-detail' i.pk %}" class="d-flex justify-content-end text-muted">{{i.title}} 더보기 ></a> 
